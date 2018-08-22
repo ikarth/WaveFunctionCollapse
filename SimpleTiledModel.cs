@@ -20,7 +20,9 @@ class SimpleTiledModel : Model
 	int tilesize;
 	bool black;
 
-	public SimpleTiledModel(string name, string subsetName, int width, int height, bool periodic, bool black) : base(width, height)
+    int adjacency_count = 0;
+
+    public SimpleTiledModel(string name, string subsetName, int width, int height, bool periodic, bool black) : base(width, height)
 	{
 		this.periodic = periodic;
 		this.black = black;
@@ -195,11 +197,24 @@ class SimpleTiledModel : Model
 
 				int ST = sp.Count;
 				propagator[d][t1] = new int[ST];
-				for (int st = 0; st < ST; st++) propagator[d][t1][st] = sp[st];
+                for (int st = 0; st < ST; st++)
+                {
+                    propagator[d][t1][st] = sp[st];
+                    adjacency_count++;
+                }
 			}
 	}
 
-	protected override bool OnBoundary(int x, int y) => !periodic && (x < 0 || y < 0 || x >= FMX || y >= FMY);
+    override public int BenchmarkPatternCount()
+    {
+        return T;
+    }
+    override public int BenchmarkAdjacencyCount()
+    {
+        return adjacency_count;
+    }
+
+    protected override bool OnBoundary(int x, int y) => !periodic && (x < 0 || y < 0 || x >= FMX || y >= FMY);
 
 	public override Bitmap Graphics()
 	{

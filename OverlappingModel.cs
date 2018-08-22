@@ -13,6 +13,8 @@ using System.Collections.Generic;
 
 class OverlappingModel : Model
 {
+    int adjacency_count = 0;
+
 	int N;
 	byte[][] patterns;
 	List<Color> colors;
@@ -28,6 +30,8 @@ class OverlappingModel : Model
 		int SMX = bitmap.Width, SMY = bitmap.Height;
 		byte[,] sample = new byte[SMX, SMY];
 		colors = new List<Color>();
+
+        pattern_extraction_begin = benchmarker.Elapsed.TotalMilliseconds;
 
 		for (int y = 0; y < SMY; y++) for (int x = 0; x < SMX; x++)
 			{
@@ -139,6 +143,7 @@ class OverlappingModel : Model
 			return true;
 		};
 
+
 		propagator = new int[4][][];
 		for (int d = 0; d < 4; d++)
 		{
@@ -148,12 +153,31 @@ class OverlappingModel : Model
 				List<int> list = new List<int>();
 				for (int t2 = 0; t2 < T; t2++) if (agrees(patterns[t], patterns[t2], DX[d], DY[d])) list.Add(t2);
 				propagator[d][t] = new int[list.Count];
-				for (int c = 0; c < list.Count; c++) propagator[d][t][c] = list[c];
+                for (int c = 0; c < list.Count; c++)
+                {
+                    propagator[d][t][c] = list[c];
+                    adjacency_count++;
+                }
+                
 			}
 		}
+        pattern_extraction_end = benchmarker.Elapsed.TotalMilliseconds;
 	}
 
-	protected override bool OnBoundary(int x, int y) => !periodic && (x + N > FMX || y + N > FMY || x < 0 || y < 0);
+    override public int BenchmarkPatternCount()
+    {
+        return patterns.Length;
+    }
+    override public int BenchmarkAdjacencyCount()
+    {
+        return adjacency_count;
+    }
+    override public int BenchmarkPatternSize()
+    {
+        return N;
+    }
+
+    protected override bool OnBoundary(int x, int y) => !periodic && (x + N > FMX || y + N > FMY || x < 0 || y < 0);
 
 	public override Bitmap Graphics()
 	{

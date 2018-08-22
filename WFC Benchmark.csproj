@@ -1,0 +1,237 @@
+﻿<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{79401A07-971E-440B-AE1F-D6D0881B2EF9}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <NoStandardLibraries>false</NoStandardLibraries>
+    <AssemblyName>WFC_Benchmark</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>WFC_Benchmark</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".gitattributes" />
+    <Content Include=".gitignore" />
+    <Content Include="samples.xml" />
+    <Content Include="samples\3Bricks.png" />
+    <Content Include="samples\Angular.png" />
+    <Content Include="samples\Castle\bridge.png" />
+    <Content Include="samples\Castle\data.xml" />
+    <Content Include="samples\Castle\ground.png" />
+    <Content Include="samples\Castle\river.png" />
+    <Content Include="samples\Castle\riverturn.png" />
+    <Content Include="samples\Castle\road.png" />
+    <Content Include="samples\Castle\roadturn.png" />
+    <Content Include="samples\Castle\t.png" />
+    <Content Include="samples\Castle\tower.png" />
+    <Content Include="samples\Castle\wall.png" />
+    <Content Include="samples\Castle\wallriver.png" />
+    <Content Include="samples\Castle\wallroad.png" />
+    <Content Include="samples\Cat.png" />
+    <Content Include="samples\Cats.png" />
+    <Content Include="samples\Cave.png" />
+    <Content Include="samples\Chess.png" />
+    <Content Include="samples\Circles\b.png" />
+    <Content Include="samples\Circles\b_half.png" />
+    <Content Include="samples\Circles\b_i.png" />
+    <Content Include="samples\Circles\b_quarter.png" />
+    <Content Include="samples\Circles\data.xml" />
+    <Content Include="samples\Circles\w.png" />
+    <Content Include="samples\Circles\w_half.png" />
+    <Content Include="samples\Circles\w_i.png" />
+    <Content Include="samples\Circles\w_quarter.png" />
+    <Content Include="samples\Circuit\bridge.png" />
+    <Content Include="samples\Circuit\component.png" />
+    <Content Include="samples\Circuit\connection.png" />
+    <Content Include="samples\Circuit\corner.png" />
+    <Content Include="samples\Circuit\data.xml" />
+    <Content Include="samples\Circuit\dskew.png" />
+    <Content Include="samples\Circuit\skew.png" />
+    <Content Include="samples\Circuit\substrate.png" />
+    <Content Include="samples\Circuit\t.png" />
+    <Content Include="samples\Circuit\track.png" />
+    <Content Include="samples\Circuit\transition.png" />
+    <Content Include="samples\Circuit\turn.png" />
+    <Content Include="samples\Circuit\viad.png" />
+    <Content Include="samples\Circuit\vias.png" />
+    <Content Include="samples\Circuit\wire.png" />
+    <Content Include="samples\City.png" />
+    <Content Include="samples\Colored City.png" />
+    <Content Include="samples\Dungeon.png" />
+    <Content Include="samples\Fabric.png" />
+    <Content Include="samples\Flowers.png" />
+    <Content Include="samples\Forest.png" />
+    <Content Include="samples\Hogs.png" />
+    <Content Include="samples\Knot.png" />
+    <Content Include="samples\Knots\corner.png" />
+    <Content Include="samples\Knots\cross.png" />
+    <Content Include="samples\Knots\data.xml" />
+    <Content Include="samples\Knots\empty.png" />
+    <Content Include="samples\Knots\line.png" />
+    <Content Include="samples\Knots\t.png" />
+    <Content Include="samples\Lake.png" />
+    <Content Include="samples\Less Rooms.png" />
+    <Content Include="samples\Link 2.png" />
+    <Content Include="samples\Link.png" />
+    <Content Include="samples\Magic Office.png" />
+    <Content Include="samples\Maze.png" />
+    <Content Include="samples\Mazelike.png" />
+    <Content Include="samples\More Flowers.png" />
+    <Content Include="samples\Mountains.png" />
+    <Content Include="samples\Nested.png" />
+    <Content Include="samples\Office 2.png" />
+    <Content Include="samples\Office.png" />
+    <Content Include="samples\Paths.png" />
+    <Content Include="samples\Platformer.png" />
+    <Content Include="samples\Qud.png" />
+    <Content Include="samples\Red Dot.png" />
+    <Content Include="samples\Red Maze.png" />
+    <Content Include="samples\Rooms.png" />
+    <Content Include="samples\Rooms\bend.png" />
+    <Content Include="samples\Rooms\corner.png" />
+    <Content Include="samples\Rooms\corridor.png" />
+    <Content Include="samples\Rooms\data.xml" />
+    <Content Include="samples\Rooms\door.png" />
+    <Content Include="samples\Rooms\empty.png" />
+    <Content Include="samples\Rooms\side.png" />
+    <Content Include="samples\Rooms\t.png" />
+    <Content Include="samples\Rooms\turn.png" />
+    <Content Include="samples\Rooms\wall.png" />
+    <Content Include="samples\Rule 126.png" />
+    <Content Include="samples\Scaled Maze.png" />
+    <Content Include="samples\Sewers.png" />
+    <Content Include="samples\Simple Knot.png" />
+    <Content Include="samples\Simple Maze.png" />
+    <Content Include="samples\Simple Wall.png" />
+    <Content Include="samples\Skew 1.png" />
+    <Content Include="samples\Skew 2.png" />
+    <Content Include="samples\Skyline 2.png" />
+    <Content Include="samples\Skyline.png" />
+    <Content Include="samples\Smile City.png" />
+    <Content Include="samples\Spirals.png" />
+    <Content Include="samples\Summer\cliff 0.png" />
+    <Content Include="samples\Summer\cliff 1.png" />
+    <Content Include="samples\Summer\cliff 2.png" />
+    <Content Include="samples\Summer\cliff 3.png" />
+    <Content Include="samples\Summer\cliffcorner 0.png" />
+    <Content Include="samples\Summer\cliffcorner 1.png" />
+    <Content Include="samples\Summer\cliffcorner 2.png" />
+    <Content Include="samples\Summer\cliffcorner 3.png" />
+    <Content Include="samples\Summer\cliffturn 0.png" />
+    <Content Include="samples\Summer\cliffturn 1.png" />
+    <Content Include="samples\Summer\cliffturn 2.png" />
+    <Content Include="samples\Summer\cliffturn 3.png" />
+    <Content Include="samples\Summer\data.xml" />
+    <Content Include="samples\Summer\grass 0.png" />
+    <Content Include="samples\Summer\grasscorner 0.png" />
+    <Content Include="samples\Summer\grasscorner 1.png" />
+    <Content Include="samples\Summer\grasscorner 2.png" />
+    <Content Include="samples\Summer\grasscorner 3.png" />
+    <Content Include="samples\Summer\road 0.png" />
+    <Content Include="samples\Summer\road 1.png" />
+    <Content Include="samples\Summer\road 2.png" />
+    <Content Include="samples\Summer\road 3.png" />
+    <Content Include="samples\Summer\roadturn 0.png" />
+    <Content Include="samples\Summer\roadturn 1.png" />
+    <Content Include="samples\Summer\roadturn 2.png" />
+    <Content Include="samples\Summer\roadturn 3.png" />
+    <Content Include="samples\Summer\watercorner 0.png" />
+    <Content Include="samples\Summer\watercorner 1.png" />
+    <Content Include="samples\Summer\watercorner 2.png" />
+    <Content Include="samples\Summer\watercorner 3.png" />
+    <Content Include="samples\Summer\waterside 0.png" />
+    <Content Include="samples\Summer\waterside 1.png" />
+    <Content Include="samples\Summer\waterside 2.png" />
+    <Content Include="samples\Summer\waterside 3.png" />
+    <Content Include="samples\Summer\waterturn 0.png" />
+    <Content Include="samples\Summer\waterturn 1.png" />
+    <Content Include="samples\Summer\waterturn 2.png" />
+    <Content Include="samples\Summer\waterturn 3.png" />
+    <Content Include="samples\Summer\water_a 0.png" />
+    <Content Include="samples\Summer\water_b 0.png" />
+    <Content Include="samples\Summer\water_c 0.png" />
+    <Content Include="samples\Town.png" />
+    <Content Include="samples\Trick Knot.png" />
+    <Content Include="samples\Village.png" />
+    <Content Include="samples\Water.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".git\config" />
+    <None Include=".git\description" />
+    <None Include=".git\FETCH_HEAD" />
+    <None Include=".git\HEAD" />
+    <None Include=".git\hooks\applypatch-msg.sample" />
+    <None Include=".git\hooks\commit-msg.sample" />
+    <None Include=".git\hooks\fsmonitor-watchman.sample" />
+    <None Include=".git\hooks\post-update.sample" />
+    <None Include=".git\hooks\pre-applypatch.sample" />
+    <None Include=".git\hooks\pre-commit.sample" />
+    <None Include=".git\hooks\pre-push.sample" />
+    <None Include=".git\hooks\pre-rebase.sample" />
+    <None Include=".git\hooks\pre-receive.sample" />
+    <None Include=".git\hooks\prepare-commit-msg.sample" />
+    <None Include=".git\hooks\update.sample" />
+    <None Include=".git\index" />
+    <None Include=".git\info\exclude" />
+    <None Include=".git\logs\HEAD" />
+    <None Include=".git\logs\refs\heads\benchmark" />
+    <None Include=".git\logs\refs\heads\master" />
+    <None Include=".git\logs\refs\remotes\origin\master" />
+    <None Include=".git\objects\pack\pack-76cdc396cd35dc5135cda470bd1f3eeba89ca575.idx" />
+    <None Include=".git\objects\pack\pack-76cdc396cd35dc5135cda470bd1f3eeba89ca575.pack" />
+    <None Include=".git\packed-refs" />
+    <None Include=".git\refs\heads\benchmark" />
+    <None Include=".git\refs\heads\master" />
+    <None Include=".git\refs\remotes\origin\master" />
+    <None Include="LICENSE.md" />
+    <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Main.cs" />
+    <Compile Include="Model.cs" />
+    <Compile Include="OverlappingModel.cs" />
+    <Compile Include="SimpleTiledModel.cs" />
+    <Compile Include="Stuff.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include=".git\objects\info\" />
+    <Folder Include=".git\refs\tags\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
+  <ProjectExtensions>
+    <VisualStudio AllowExistingFolder="true" />
+  </ProjectExtensions>
+</Project>

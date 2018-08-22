@@ -7,10 +7,34 @@ The software is provided "as is", without warranty of any kind, express or impli
 */
 
 using System;
+using System.Diagnostics;
+using System.Collections.Generic;
 
 abstract class Model
 {
-	protected bool[][] wave;
+    public virtual int BenchmarkPatternCount()
+    {
+        return 0;
+    }
+    public virtual int BenchmarkAdjacencyCount()
+    {
+        return 0;
+    }
+    public virtual int BenchmarkOuputSizeX()
+    {
+        return FMX;
+    }
+    public virtual int BenchmarkOuputSizeY()
+    {
+        return FMY;
+    }
+    public virtual int BenchmarkPatternSize()
+    {
+        return -1;
+    }
+
+
+    protected bool[][] wave;
 
 	protected int[][][] propagator;
 	int[][][] compatible;
@@ -30,15 +54,42 @@ abstract class Model
 	double sumOfWeights, sumOfWeightLogWeights, startingEntropy;
 	double[] sumsOfWeights, sumsOfWeightLogWeights, entropies;
 
-	protected Model(int width, int height) 
+    public Stopwatch benchmarker;
+    public double pattern_extraction_begin = 0.0f;
+    public double pattern_extraction_end = 0.0f;
+    public TimeSpan init_start;
+    public List<double> observation_begin = new List<double>(8192);
+    public List<double> observation_end = new List<double>(8192);
+    public List<double> propagation_begin = new List<double>(8192);
+    public List<double> propagation_end = new List<double>(8192);
+    public double run_begin = 0.0;
+    public double run_end = 0.0;
+    int observation_steps = 0;
+    int propagation_steps = 0;
+
+    protected Model(int width, int height) 
 	{
 		FMX = width;
 		FMY = height;
-	}
+
+        benchmarker = Stopwatch.StartNew();
+        observation_steps = 0;
+        propagation_steps = 0;
+    }
+
+    
 
 	void Init()
 	{
-		wave = new bool[FMX * FMY][];
+        init_start = benchmarker.Elapsed;
+        observation_begin = new List<double>(8192);
+        observation_end = new List<double>(8192);
+        propagation_begin = new List<double>(8192);
+        propagation_end = new List<double>(8192);
+        run_begin = 0.0;
+        run_end = 0.0;
+
+    wave = new bool[FMX * FMY][];
 		compatible = new int[wave.Length][][];
 		for (int i = 0; i < wave.Length; i++)
 		{
@@ -71,6 +122,8 @@ abstract class Model
 
 	bool? Observe()
 	{
+        observation_steps++;
+        observation_begin.Add(benchmarker.Elapsed.TotalMilliseconds);
 		double min = 1E+3;
 		int argmin = -1;
 
@@ -79,7 +132,11 @@ abstract class Model
 			if (OnBoundary(i % FMX, i / FMX)) continue;
 
 			int amount = sumsOfOnes[i];
-			if (amount == 0) return false;
+            if (amount == 0)
+            {
+                observation_end.Add(benchmarker.Elapsed.TotalMilliseconds);
+                return false;
+            }
 
 			double entropy = entropies[i];
 			if (amount > 1 && entropy <= min)
@@ -97,7 +154,8 @@ abstract class Model
 		{
 			observed = new int[FMX * FMY];
 			for (int i = 0; i < wave.Length; i++) for (int t = 0; t < T; t++) if (wave[i][t]) { observed[i] = t; break; }
-			return true;
+            observation_end.Add(benchmarker.Elapsed.TotalMilliseconds);
+            return true;
 		}
 
 		double[] distribution = new double[T];
@@ -106,12 +164,14 @@ abstract class Model
 
 		bool[] w = wave[argmin];
 		for (int t = 0; t < T; t++)	if (w[t] != (t == r)) Ban(argmin, t);
-
-		return null;
+        observation_end.Add(benchmarker.Elapsed.TotalMilliseconds);
+        return null;
 	}
 
 	protected void Propagate()
 	{
+        propagation_steps++;
+        propagation_begin.Add(benchmarker.Elapsed.TotalMilliseconds);
 		while (stacksize > 0)
 		{
 			var e1 = stack[stacksize - 1];
@@ -146,11 +206,14 @@ abstract class Model
 				}
 			}
 		}
-	}
+        propagation_end.Add(benchmarker.Elapsed.TotalMilliseconds);
+    }
 
 	public bool Run(int seed, int limit)
 	{
-		if (wave == null) Init();
+        benchmarker = Stopwatch.StartNew();
+        run_begin = benchmarker.Elapsed.TotalMilliseconds;
+        if (wave == null) Init();
 
 		Clear();
 		random = new Random(seed);
@@ -158,11 +221,16 @@ abstract class Model
 		for (int l = 0; l < limit || limit == 0; l++)
 		{
 			bool? result = Observe();
-			if (result != null) return (bool)result;
+            if (result != null)
+            {
+                run_end = benchmarker.Elapsed.TotalMilliseconds;
+                return (bool)result;
+            }
 			Propagate();
 		}
 
-		return true;
+        run_end = benchmarker.Elapsed.TotalMilliseconds;
+        return true;
 	}
 
 	protected void Ban(int i, int t)
