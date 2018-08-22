@@ -211,6 +211,12 @@ abstract class Model
 
 	public bool Run(int seed, int limit)
 	{
+        observation_begin = new List<double>();
+        observation_end = new List<double>();
+        propagation_begin = new List<double>();
+        propagation_end = new List<double>();
+        propagation_steps = 0;
+        observation_steps = 0;
         benchmarker = Stopwatch.StartNew();
         run_begin = benchmarker.Elapsed.TotalMilliseconds;
         if (wave == null) Init();

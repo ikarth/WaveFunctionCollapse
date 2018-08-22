@@ -1,0 +1,6 @@
+C:\Users\Isaac\Isaac\Dev\WaveFunctionCollapse\benchmark\maxim\bin\Release\WFC_Benchmark.exe
+C:\Users\Isaac\Isaac\Dev\WaveFunctionCollapse\benchmark\maxim\bin\Release\WFC_Benchmark.pdb
+C:\Users\Isaac\Isaac\Dev\WaveFunctionCollapse\benchmark\maxim\obj\x86\Release\WFC Benchmark.csproj.CoreCompileInputs.cache
+C:\Users\Isaac\Isaac\Dev\WaveFunctionCollapse\benchmark\maxim\obj\x86\Release\WFC_Benchmark.exe
+C:\Users\Isaac\Isaac\Dev\WaveFunctionCollapse\benchmark\maxim\obj\x86\Release\WFC_Benchmark.pdb
+C:\Users\Isaac\Isaac\Dev\WaveFunctionCollapse\benchmark\maxim\obj\x86\Release\WFC Benchmark.csprojResolveAssemblyReference.cache
